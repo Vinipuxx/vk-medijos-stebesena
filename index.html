@@ -586,6 +586,9 @@
     $("searchInput").value = title;
     renderChips(computeAggregates(state.docs));
     renderList(state.docs);
+    // vienas rezultatas -> iškart išskleisti, kad nereikėtų dar kartą spausti
+    var cards = $("listHost").querySelectorAll(".card");
+    if (cards.length === 1) cards[0].classList.add("open");
     $("listHost").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -628,6 +631,7 @@
         '<span class="cnt">' + count + '</span>';
       row.addEventListener("click", function () {
         state.activeSritis = (state.activeSritis === s) ? null : s;
+        clearQuery();
         renderBars(agg);
         renderChips(agg);
         renderList(state.docs);
@@ -806,6 +810,12 @@
 
   // ---------------- filter / search / list ----------------
 
+  function clearQuery() {
+    state.query = "";
+    var si = $("searchInput");
+    if (si) si.value = "";
+  }
+
   function matchesFilter(p) {
     if (state.activeSritis && p.sritis !== state.activeSritis) return false;
     if (state.query) {
@@ -824,14 +834,14 @@
     allChip.type = "button";
     allChip.className = "chip" + (state.activeSritis === null ? " active" : "");
     allChip.textContent = "Visos sritys";
-    allChip.addEventListener("click", function () { state.activeSritis = null; renderBars(agg); renderChips(agg); renderList(state.docs); });
+    allChip.addEventListener("click", function () { state.activeSritis = null; clearQuery(); renderBars(agg); renderChips(agg); renderList(state.docs); });
     host.appendChild(allChip);
     active.forEach(function (s) {
       var chip = document.createElement("button");
       chip.type = "button";
       chip.className = "chip" + (state.activeSritis === s ? " active" : "");
       chip.textContent = s + " (" + agg.bySritis[s] + ")";
-      chip.addEventListener("click", function () { state.activeSritis = (state.activeSritis === s) ? null : s; renderBars(agg); renderChips(agg); renderList(state.docs); });
+      chip.addEventListener("click", function () { state.activeSritis = (state.activeSritis === s) ? null : s; clearQuery(); renderBars(agg); renderChips(agg); renderList(state.docs); });
       host.appendChild(chip);
     });
   }
