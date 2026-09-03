@@ -1,0 +1,255 @@
+{
+  "sheetName": "Zin. apzvalga 2026-09-03",
+  "columns": [
+    {
+      "width": 5,
+      "numeric": true,
+      "key": "nr",
+      "header": "Nr."
+    },
+    {
+      "width": 38,
+      "wrap": true,
+      "key": "title",
+      "header": "Problemos pavadinimas"
+    },
+    {
+      "width": 70,
+      "wrap": true,
+      "key": "desc",
+      "header": "Detalus problemos aprašymas (faktai/citatos iš straipsnio)"
+    },
+    {
+      "width": 16,
+      "wrap": true,
+      "key": "sourceName",
+      "header": "Šaltinis (svetainė)"
+    },
+    {
+      "width": 20,
+      "hyperlink": true,
+      "key": "url",
+      "header": "Nuoroda į straipsnį"
+    },
+    {
+      "width": 13,
+      "wrap": true,
+      "key": "date",
+      "header": "Straipsnio data"
+    },
+    {
+      "width": 30,
+      "wrap": true,
+      "key": "sritis",
+      "header": "Viešojo valdymo sritis"
+    },
+    {
+      "width": 34,
+      "wrap": true,
+      "key": "subtema",
+      "header": "Potemė (klasifikatorius srityje)"
+    },
+    {
+      "width": 60,
+      "wrap": true,
+      "key": "repeats",
+      "header": "Pasikartojimai (data | šaltinis | nuoroda)"
+    },
+    {
+      "width": 10,
+      "numeric": true,
+      "key": "repeatCount",
+      "header": "Pasikartojimų skaičius"
+    },
+    {
+      "width": 13,
+      "wrap": true,
+      "key": "firstSeen",
+      "header": "Pirmą kartą pastebėta"
+    }
+  ],
+  "rows": [
+    {
+      "nr": 1,
+      "title": "Valstybės kontrolė: perdirbti tinkamos atliekos per dažnai sudeginamos ar vežamos į sąvartynus",
+      "desc": "„Perdirbti tinkamos atliekos Lietuvoje vis dar pernelyg dažnai sudeginamos arba šalinamos sąvartynuose, užuot grąžinus jas į ekonomiką.“ „2021 m. mišriose komunalinėse atliekose buvo 240,2 tūkst. tonų perdirbti tinkamų atliekų, tačiau perdirbti paruošta tik 8,5 proc.“ „Ne visos savivaldybės pateikė metines ataskaitas, o tai neleidžia tiksliai planuoti reikalingus pajėgumus.“",
+      "sourceName": "Valstybės kontrolė",
+      "url": "https://www.valstybeskontrole.lt/LT/Post/19006/",
+      "url_text": "Valstybės kontrolė straipsnis",
+      "date": "2026-09-03",
+      "sritis": "Aplinka, miškai ir klimato kaita",
+      "subtema": "Komunalinių atliekų perdirbimo pajėgumai",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-09-03"
+    },
+    {
+      "nr": 2,
+      "title": "Klaipėdos savivaldybė lelido įrengti statybinių atliekų sąvartyną miesto šiaurėje",
+      "desc": "„Klaipėdos savivaldybė leido keliems metams įkurti legalų statybinių medžiagų sąvartyną“ Medelyno gatvėje. Leidimas „atitverti 0,3 ha ploto teritoriją statybvietės įrengimui“ išduotas UAB „Dasalis“. „2025-ūjų balandį su savivaldybe pasirašė iki 2028 m. gegužės pabaigos galiojančią 2 mln. eurų sutartį“ dėl miesto pietinės dalies infrastruktūros darbų, o įmonei „nuo vietinės rinkliavos mokėjimo atleidžiama.“",
+      "sourceName": "Atvira Klaipėda",
+      "url": "https://www.atviraklaipeda.lt/tvarkydami-miesto-pietus-siaureje-ikure-savartyna/",
+      "url_text": "Atvira Klaipėda straipsnis",
+      "date": "2026-09-03",
+      "sritis": "Aplinka, miškai ir klimato kaita",
+      "subtema": "Statybinių atliekų sąvartynų įteisinimas savivaldybėse",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-09-03"
+    },
+    {
+      "nr": 3,
+      "title": "Prognozuojamas elektros kainos šuolis rugsėjį – iki 50 proc.",
+      "desc": "„Rugpjūtį elektros kaina biržoje Lietuvoje paaugo apie 6 proc. ir siekė 80 eurų už megavatvalandę.“ „Rugsėjį kaina gali šoktelėti perpus, apie 50 proc.“ „Rugsėjį elektros energijos kaina Lietuvoje gali siekti maždaug 122 eurus už megavatvalandę.“ Priežastys: „ir toliau vykstantys infrastruktūros remonto darbai, ribojantys pigios elektros patekimą į Lietuvą, mažėjanti atsinaujinančių šaltinių generacija ir brangesnė iškastiniu kuru gaminama elektros energija.“",
+      "sourceName": "15min.lt",
+      "url": "https://www.15min.lt/verslas/naujiena/energetika/perspeja-del-elektros-kainos-rugseji-gali-brangti-perpus-664-2754342",
+      "url_text": "15min.lt straipsnis",
+      "date": "2026-09-01",
+      "sritis": "Energetika",
+      "subtema": "Elektros kainų nestabilumas ir priklausomybė nuo importo",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-09-01"
+    },
+    {
+      "nr": 4,
+      "title": "Klaipėdos miesto poliklinika per pusantrų metų neteko trečdalio gydytojų",
+      "desc": "„Nuo 2024 iki 2026 metų pirmojo pusmečio Klaipėdos miesto poliklinika neteko 27,7 proc. įstaigoje dirbusių gydytojų ir beveik 17 proc. slaugytojų.“ „Klaipėdos miesto poliklinikoje dirbančių gydytojų algos yra apie 30,7 proc. mažesnės lyginant su kitomis panašiomis miesto sveikatos priežiūros įstaigomis.“ „Viršsutartinių paslaugų apmokėjimas vėluoja“ ir tai „išbalansuoja poliklinikos pinigų srautus.“",
+      "sourceName": "Atvira Klaipėda",
+      "url": "https://www.atviraklaipeda.lt/klaipedos-miesto-poliklinikos-situacija-aptarta-seime/",
+      "url_text": "Atvira Klaipėda straipsnis",
+      "date": "2026-08-29",
+      "sritis": "Sveikatos apsauga",
+      "subtema": "Medikų trūkumas ir atlyginimų atotrūkis savivaldybių poliklinikose",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-08-29"
+    },
+    {
+      "nr": 5,
+      "title": "Prognozuojamas iki 6000 mokytojų trūkumas iki 2031 m.",
+      "desc": "„Iki 2031 m. gali pritrūkti 6000 mokytojų“ – ŠMSM nustatytas skaičius. „Beveik pusė jaunesnių nei 30 metų Lietuvos mokytojų svarsto galimybę palikti profesiją per artimiausius penkerius metus.“ „84 proc. mokytojų sutinka, kad savo mokykloje gali pasikliauti kolegomis“, tačiau tik 37 proc. bent kartą per mėnesį tariasi su kolegomis dėl mokinių pažangos.",
+      "sourceName": "15min.lt",
+      "url": "https://www.15min.lt/naujiena/aktualu/svietimas/mokytoju-truksta-ne-tik-lietuvoje-ka-daro-kitos-salys-233-2714380",
+      "url_text": "15min.lt straipsnis",
+      "date": "2026-06-29",
+      "sritis": "Švietimas, mokslas ir sportas",
+      "subtema": "Pedagogų trūkumas ir kaita",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-06-29"
+    },
+    {
+      "nr": 6,
+      "title": "STT nustatė korupcijos rizikas sporto infrastruktūros ir programų finansavime",
+      "desc": "„Per 2023–2025 m. iš valstybės biudžeto sporto finansavimui skirta daugiau kaip 76,6 mln. eurų.“ STT korupcijos rizikos analizė apėmė Švietimo, mokslo ir sporto ministeriją, Nacionalinę sporto agentūrą ir Vilniaus, Panevėžio, Kauno, Akmenės, Kupiškio bei Plungės savivaldybes. „Finansavimas skirtas futbolo klubui, kurio prezidentas buvo savivaldybės meras.“ Valstybės investuota baseinų infrastruktūra „naudojama ir komercinėmis SPA ar pirčių paslaugomis“ be aiškių viešojo intereso sąlygų.",
+      "sourceName": "jp.lt",
+      "url": "https://jp.lt/stt-nustate-korupcijos-rizikas-sporto-finansavime-priimant-sprendimus-matoma-ir-politiniu-rysiu-itaka/",
+      "url_text": "jp.lt straipsnis",
+      "date": "2026-06-01",
+      "sritis": "Švietimas, mokslas ir sportas",
+      "subtema": "Sporto finansavimo skaidrumas ir interesų konfliktai",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-06-01"
+    },
+    {
+      "nr": 7,
+      "title": "Švietimo pagalba specialiųjų poreikių vaikams vėluoja dėl sisteminių spragų",
+      "desc": "(2026-02-19, audito pradžia) „2024 m. apie 70 tūkst. (15 proc.) mokinių turėjo specialiųjų ugdymo poreikių, iš jų apie 10 tūkst. – negalią.“ (2026-07-13, VK audito duomenys) „70 proc.“ profesinį mokymą baigusių specialiųjų ugdymosi poreikių turinčių jaunuolių neiįsidarbina. (2026-08-19, audito rezultatai) „34 proc. pedagoginių psichologinių tarnybų nurodo, kad poreikių vertinimo eilėse vaikams tenka laukti ilgiau nei mėnesį.“ „35,8 proc. PPT yra gavusios pranešimų iš mokyklų, kurios negalėjo užregistruoti mokinio vertinimui dėl tėvų nesutikimo.“ „21 proc. vertintų mokinių, kuriems pirminis vertinimas atliktas 2024–2025 mokslo metais, jokios pagalbos mokykloje negavo dėl žmogiškųjų išteklių stygiaus.“ Ekspertų vertinimu, „nuoseklios gabių vaikų atpažinimo ir ugdymo sistemos Lietuvoje tiesiog nėra.“ 2025 m. švietimo pagalbai mokyklose skirta 287,4 mln. eurų (2024 m. – 233,4 mln. eurų), tačiau savivaldybių savarankiškas įnašas vienam mokiniui skiriasi šimtus kartų.",
+      "sourceName": "LRT",
+      "url": "https://www.lrt.lt/naujienos/svietimas/45/3026031/valstybe-kontrole-vaiku-svietimo-pagalba-veluoja-del-sisteminiu-spragu",
+      "url_text": "LRT straipsnis",
+      "date": "2026-08-19",
+      "sritis": "Švietimas, mokslas ir sportas",
+      "subtema": "Specialiojo ugdymo (švietimo pagalbos) prieinamumas",
+      "repeats": "2026-02-19 | Alkas.lt | https://alkas.lt/2026/02/19/valstybes-kontroles-demesys-svietimui-ir-sveikatos-apsaugai/  ;  2026-07-13 | Valstybės kontrolė | https://www.valstybeskontrole.lt/LT/Product/24412  ;  2026-08-19 | LRT | https://www.lrt.lt/naujienos/svietimas/45/3026031/valstybe-kontrole-vaiku-svietimo-pagalba-veluoja-del-sisteminiu-spragu",
+      "repeatCount": 3,
+      "firstSeen": "2026-02-19"
+    },
+    {
+      "nr": 8,
+      "title": "2026 m. valstybinio kelių tinklo remonto finansavimas įvardijamas kaip nepakankamas",
+      "desc": "„Biudžetas tikrai neatrodo įkvepiantis ir nepanašus į tą, kuris pradėtų spręsti degraduojančių kelių problemą.“ Valstybinio kelių tinklo remontui „lieka rekordiškai maža suma... gali būti mažesnė nei 100 milijonų eurų.“ Institucijos turi „rūpintis daugiau nei 20 tūkst. kilometrų kelių.“",
+      "sourceName": "LRT",
+      "url": "https://www.lrt.lt/naujienos/eismas/7/2764170/keliu-bukles-proverzis-2026-metais-mazai-tiketinas-biudzetas-neatrodo-ikvepiantis",
+      "url_text": "LRT straipsnis",
+      "date": "2025-12-07",
+      "sritis": "Transportas ir ryšiai",
+      "subtema": "Kelių infrastruktūros finansavimas",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2025-12-07"
+    },
+    {
+      "nr": 9,
+      "title": "Sunkiasvorio transporto svėrimo kontrolė šalyje vykdoma vos 22 inspektorių ir vieno stacionaraus punkto",
+      "desc": "„22 inspektoriai visoje šalyje — tai ne abstraktus trūkumas, tai struktūrinė problema.“ „Vienas stacionarus kontrolės punktas šalyje, per kurią eina viena pagrindinių ES krovinių tranzito arterijų.“ Šalyje „kasdien pravažiuoja 18 000 sunkiasvorių vienetų vien automagistralėmis.“ Turima „14 transporto priemonių“, trūksta modernios svėrimo įrangos. Vėliau Susisiekimo ministerija patvirtino praktikoje: „Per 25 kontrolės dienas patikrintos 165 transporto priemonės. Iš jų 69 transporto priemonėms nustatytas bent vienas pažeidimas.“ „Pasitaikė atvejis, kai viršsvoris siekė net 25 tonas.“ „Nustatyta 150 vairavimo ir poilsio režimo pažeidimų (59 proc.), 66 techninės būklės (26 proc.).“",
+      "sourceName": "Susisiekimo ministerija",
+      "url": "https://sumin.lrv.lt/lt/naujienos/ministras-juras-taminskas-patikrinimai-siaures-lietuvoje-parode-problemas-susijusias-ne-tik-su-sunkiasvorio-transporto-virssvoriu-zT5a",
+      "url_text": "Susisiekimo ministerija straipsnis",
+      "date": "2026-09-03",
+      "sritis": "Transportas ir ryšiai",
+      "subtema": "Kelių priežiūros ir sunkiasvorio transporto kontrolės pajėgumai",
+      "repeats": "2026-04-03 | Reidas Official | https://reidasofficial.lt/eismas/stop-keliu-gadinimui-svarstykles-inspektoriai-planas-2026/  ;  2026-09-03 | Susisiekimo ministerija | https://sumin.lrv.lt/lt/naujienos/ministras-juras-taminskas-patikrinimai-siaures-lietuvoje-parode-problemas-susijusias-ne-tik-su-sunkiasvorio-transporto-virssvoriu-zT5a",
+      "repeatCount": 2,
+      "firstSeen": "2026-04-03"
+    },
+    {
+      "nr": 10,
+      "title": "Valstybės kontrolė: ginkluotės pirkimų sistema nespėja atliepti kariuomenės poreikių",
+      "desc": "„Ginkluotės ir karinės įrangos įsigijimų sistema nespėja atliepti kariuomenės poreikius.“ Audito duomenimis, 45 proc. vertintų ginkluotės pirkimų sprendimus faktiškai priėmė patariamosios institucijos, kurių nariai neturi privalomos privačių interesų deklaravimo prievolės. Kartu paskelbtame pranešime nurodoma: „Milijardiniai gynybos pirkimai reikalauja didesnio skaidrumo ir aiškios atsakomybės.“",
+      "sourceName": "Valstybės kontrolė",
+      "url": "https://www.valstybeskontrole.lt/LT/Product/24416/ginkluotes-ir-karines-irangos-isigijimai",
+      "url_text": "Valstybės kontrolė straipsnis",
+      "date": "2026-07-31",
+      "sritis": "Valstybės saugumas ir gynyba",
+      "subtema": "Ginkluotės pirkimų skaidrumas ir atsakomybė",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-07-31"
+    },
+    {
+      "nr": 11,
+      "title": "Savivaldybės ragina spręsti civilinės saugos priedangų trūkumą",
+      "desc": "„Šimtai ar tūkstančiai“ gyventojų neturi tinkamų, tik dėl pavojaus naudotinų slėptuvių. Kazlų Rūdoje planuota įrengti požeminį centrą, kuriame galėtų pasislėpti apie 1500 gyventojų. Vidaus reikalų ministerija patvirtino palaikanti šią iniciatyvą ir nurodė, jog Regionų plėtros programai skirta 52 mln. eurų civilinės saugos stiprinimui.",
+      "sourceName": "Lietuvos savivaldybių asociacija",
+      "url": "https://www.lsa.lt/naujienos/2026/05/27/universalios_priedangos/",
+      "url_text": "Lietuvos savivaldybių asociacija straipsnis",
+      "date": "2026-05-27",
+      "sritis": "Viešasis saugumas",
+      "subtema": "Civilinės saugos priedangų (slėptuvių) trūkumas",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-05-27"
+    },
+    {
+      "nr": 12,
+      "title": "Premjero žmonos įdarbinimas be konkurso Kauno r. savivaldybėje: nepotizmo kritika ir kontrolės institucijos spraga",
+      "desc": "Aistė Sinkevičienė tapo Viešųjų ir tarptautinių ryšių skyriaus vedėja „be konkurso“ Kauno rajono savivaldybėje. Vienu metu dirbo tiek savivaldybėje, tiek Raudondvario dvare, tačiau žurnalistams „nepavyko rasti įrodymų, kad premjero žmona būtų faktiškai dirbusi, pavyzdžiui, Raudondvario dvare.“ S. Malinausko komentaras: „Visiškai akivaizdu, kad Raudondvaryje, Kauno rajono savivaldybėje turime švogerizmą, nepotizmą, darbo biržą, atidarytą saviems.“ Vėliau, komentuodama šią viešą diskusiją, „VDI teigia neturėjanti kompetencijos vertinti, ar valstybės ar savivaldybės įstaigoje dirbantis darbuotojas realiai atlieka savo pareigas“ – VDI nuomone, fiktyvaus įdarbinimo atvejų vertinimas turėtų priklausyti darbdaviui ir teisėsaugos institucijoms, o ne inspekcijai.",
+      "sourceName": "15min.lt",
+      "url": "https://www.15min.lt/naujiena/aktualu/lietuva/vdi-teigia-kad-ne-jos-kompetencija-vertinti-ar-savivaldybes-istaigos-darbuotojas-realiai-dirba-56-2756030",
+      "url_text": "15min.lt straipsnis",
+      "date": "2026-09-03",
+      "sritis": "Viešasis valdymas, regioninė politika ir viešasis administravimas",
+      "subtema": "Nepotizmas ir personalo kontrolės institucinė spraga savivaldybėse",
+      "repeats": "2026-09-01 | LRT | https://www.lrt.lt/naujienos/lietuvoje/2/3038408/malinauskas-kauno-r-savivaldybeje-turime-svogerizma-nepotizma-darbo-birza-saviems  ;  2026-09-03 | 15min.lt | https://www.15min.lt/naujiena/aktualu/lietuva/vdi-teigia-kad-ne-jos-kompetencija-vertinti-ar-savivaldybes-istaigos-darbuotojas-realiai-dirba-56-2756030",
+      "repeatCount": 2,
+      "firstSeen": "2026-09-01"
+    },
+    {
+      "nr": 13,
+      "title": "Klausimai dėl Vilniaus savivaldybės apmokamos komunikacijos su nuomonės formuotojais skaidrumo",
+      "desc": "„Iš viso penkiems turinio kūrėjams skirta 6,8 tūkst. eurų be PVM, o daugiau nei pusė šios sumos – 3,8 tūkst. eurų – atiteko būtent R. Mackevičiui.“ Tarybos narys A. Nemunaitis: „Nieko kol kas nekaltinu – tam ir yra institucijos. Bet atsakymai į šiuos klausimus visuomenei turi būti pateikti.“ Kreiptasi į tris institucijas – Valstybinę vartotojų teisių apsaugos tarnybą, Vyriausiąją rinkimų komisiją ir Specialiųjų tyrimų tarnybą. „R. Mackevičiaus vaizdo įrašai surinko šimtus tūkstančių peržiūrų, o po kampanijos starto naujojo puslapio lankomumas išaugo daugiau nei vienuolika kartų.“",
+      "sourceName": "77.lt",
+      "url": "https://77.lt/sostines-savivaldybe-uzkliuvo-su-viesais-pirkimais-is-nuomones-formuotoju",
+      "url_text": "77.lt straipsnis",
+      "date": "2026-04-21",
+      "sritis": "Viešasis valdymas, regioninė politika ir viešasis administravimas",
+      "subtema": "Savivaldybių komunikacijos ir viešųjų pirkimų skaidrumas",
+      "repeats": "—",
+      "repeatCount": 1,
+      "firstSeen": "2026-04-21"
+    }
+  ]
+}

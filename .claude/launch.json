@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vk-dashboard",
+      "runtimeExecutable": "pwsh",
+      "runtimeArgs": ["-NoProfile", "-File", "skriptai/Serve-Static.ps1", "-Port", "8901"],
+      "port": 8901
+    }
+  ]
+}
