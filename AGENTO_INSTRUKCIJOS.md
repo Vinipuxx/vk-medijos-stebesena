@@ -37,7 +37,8 @@ nereikia. `ataskaitos/*.xlsx` visada regeneruojamas IŠ `data/problems.json`
 
 | Kas | Kur |
 |---|---|
-| Šaltinių registras (96 šaltiniai, 8 grupės) | `saltiniai/VK_strateginio_tyrimo_saltiniu_sarasas.xlsx` |
+| Šaltinių registras — istorinis originalas | `saltiniai/VK_strateginio_tyrimo_saltiniu_sarasas.xlsx` |
+| **Kanoninis, gyvas šaltinių sąrašas** (redaguojamas per svetainę) | `data/sources.json` |
 | **Kanoniniai duomenys** (visos nustatytos problemos) | `data/problems.json` |
 | Paskutinio paleidimo metaduomenys | `data/meta.json` |
 | Dašbordas (statinis, be backend'o) | `index.html` |
@@ -75,9 +76,12 @@ naują potemę, PATIKRINTI `data/problems.json`, ar panaši jau yra.
 
 1. **Pradinė būsena.** Perskaityti `data/problems.json` (esami įrašai — reikės tikrinti
    pasikartojimus) ir `data/meta.json` (`lastRunDate` — nuo kada ieškoti naujų straipsnių).
-2. **Šaltinių sąrašas.** Atsidaryti `saltiniai/VK_strateginio_tyrimo_saltiniu_sarasas.xlsx`,
-   lapą „Šaltiniai". Jei stulpelis J („Įtraukta į stebėseną") užpildytas — tikrinti tik
-   eilutes su „Taip". Jei tuščias — tikrinti visus registre esančius šaltinius.
+2. **Šaltinių sąrašas.** Skaityti `data/sources.json` — tai KANONINIS, gyvas šaltinių
+   sąrašas (jį svetainės lankytojai gali redaguoti per „Stebimi šaltiniai" skydelį ir
+   atsiųsti atnaujintą versiją; jei tokia gauta, ji jau bus pakeitusi šį failą repo).
+   Tikrinti tik įrašus, kur `"monitored": true`. (`saltiniai/VK_strateginio_tyrimo_saltiniu_sarasas.xlsx`
+   lieka istorinis originalas — `data/sources.json` sugeneruotas iš jo per
+   `skriptai/Parse-Sources.ps1`, bet nuo šiol redaguojamas per svetainę, ne per Excel.)
 3. **Naujienų rinkimas.** Kiekvienam šaltiniui: WebFetch homepage/naujienų srautą,
    nustatyti ar yra naujų straipsnių nuo `lastRunDate`. Naudoti WebSearch tiksliniams
    raktažodžiams pagal 16 sričių, kai homepage tiesioginis nuskaitymas blokuojamas
@@ -163,4 +167,6 @@ Masyvas objektų:
 - **2026-09-03** — pirmas bandomasis paleidimas (10 šaltinių, 7 problemos), po to pilnas
   paleidimas (68/96 šaltinių, 13 problemų). Nuo Claude Artifact (gyva duomenų bazė,
   reikėjo prisijungimo) pereita prie statinio GitHub Pages sprendimo su
-  `data/problems.json`. Nuo tada — kas savaitę (pirmadieniais) automatinis paleidimas.
+  `data/problems.json`. Sukurtas savaitinis automatinis paleidimas (pirmadieniais 8:00).
+  Pridėtas `data/sources.json` — šaltinių sąrašas dabar redaguojamas per svetainę
+  („Stebimi šaltiniai" skydelis), o ne tik per originalų Excel registrą.
