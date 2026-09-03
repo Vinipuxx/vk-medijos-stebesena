@@ -1,19 +1,24 @@
 <#
 .SYNOPSIS
-  Konvertuoja skriptai/db_export/problems/*.json (read_db eksportas) į
-  New-Xlsx.ps1 laukiamą JSON formatą ir sugeneruoja galutinį .xlsx.
+  Konvertuoja data/problems.json (kanoninis duomenų šaltinis) į New-Xlsx.ps1
+  laukiamą formatą ir sugeneruoja galutinį .xlsx į ataskaitos/.
 #>
 param(
-    [string]$ExportDir = "C:\Users\vmichalovska\Documents\VK_medijos_stebesena\skriptai\db_export\problems",
-    [string]$OutJson = "C:\Users\vmichalovska\Documents\VK_medijos_stebesena\skriptai\apzvalga_pilna_2026-09-03.json",
-    [string]$OutXlsx = "C:\Users\vmichalovska\Documents\VK_medijos_stebesena\ataskaitos\VK_zin_apzvalga_2026-09-03.xlsx"
+    [string]$ProblemsJson = "C:\Users\vmichalovska\Documents\VK_medijos_stebesena\data\problems.json",
+    [string]$OutXlsx = ""  # jei tuščia, naudojama ataskaitos/VK_zin_apzvalga_<šiandienos data>.xlsx
 )
 
-$files = Get-ChildItem -Path $ExportDir -Filter "*.json"
+$ErrorActionPreference = "Stop"
+$root = "C:\Users\vmichalovska\Documents\VK_medijos_stebesena"
+if (-not $OutXlsx) {
+    $today = Get-Date -Format "yyyy-MM-dd"
+    $OutXlsx = Join-Path $root "ataskaitos\VK_zin_apzvalga_$today.xlsx"
+}
+
+$problems = Get-Content -Raw -Path $ProblemsJson -Encoding UTF8 | ConvertFrom-Json
 $rows = @()
 $i = 1
-foreach ($f in ($files | Sort-Object { (Get-Content $_.FullName -Raw | ConvertFrom-Json).sritis }, Name)) {
-    $doc = Get-Content $f.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
+foreach ($doc in ($problems | Sort-Object sritis, articleDate)) {
     $occ = $doc.occurrences
     if ($occ.Count -gt 1) {
         $repeatsTxt = ($occ | ForEach-Object { "$($_.date) | $($_.source) | $($_.url)" }) -join "  ;  "
@@ -38,7 +43,7 @@ foreach ($f in ($files | Sort-Object { (Get-Content $_.FullName -Raw | ConvertFr
 }
 
 $spec = [PSCustomObject]@{
-    sheetName = "Zin. apzvalga 2026-09-03"
+    sheetName = "Zin. apzvalga"
     columns = @(
         @{ header = "Nr."; key = "nr"; width = 5; numeric = $true }
         @{ header = "Problemos pavadinimas"; key = "title"; width = 38; wrap = $true }
@@ -55,7 +60,9 @@ $spec = [PSCustomObject]@{
     rows = $rows
 }
 
-$spec | ConvertTo-Json -Depth 6 | Out-File -FilePath $OutJson -Encoding utf8
+$tmpJson = Join-Path $env:TEMP ("apzvalga_spec_" + [guid]::NewGuid().ToString("N") + ".json")
+$spec | ConvertTo-Json -Depth 6 | Out-File -FilePath $tmpJson -Encoding utf8
 
-& "$PSScriptRoot\New-Xlsx.ps1" -InputJson $OutJson -OutputXlsx $OutXlsx
-Write-Output "Eilučių: $($rows.Count)"
+& "$PSScriptRoot\New-Xlsx.ps1" -InputJson $tmpJson -OutputXlsx $OutXlsx
+Remove-Item -Force $tmpJson
+Write-Output "Eilučių: $($rows.Count) -> $OutXlsx"
