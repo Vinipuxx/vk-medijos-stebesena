@@ -117,6 +117,50 @@
   .export-btn:hover { background: var(--accent-strong); }
   .export-btn:disabled { opacity: .5; cursor: default; }
   .export-btn svg { width: 13px; height: 13px; }
+  .export-btn.ghost { background: var(--surface-raised); color: var(--accent); border: 1px solid var(--border); }
+  .export-btn.ghost:hover { background: var(--accent-wash); }
+
+  /* ---- sources panel ---- */
+  .src-panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+  .src-panel-head .hint { max-width: 62ch; }
+  .src-panel-actions { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; }
+  .src-panel-head code { font-family: var(--font-mono); font-size: 11px; background: var(--chip-bg); padding: 1px 5px; border-radius: 4px; }
+  .add-source { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; padding: 10px; background: var(--page-plane); border-radius: 8px; border: 1px solid var(--border); }
+  .add-source input {
+    font-family: var(--font-sans); font-size: 12.5px; padding: 7px 10px; border-radius: 6px;
+    border: 1px solid var(--border); background: var(--surface-raised); color: var(--text-primary);
+    flex: 1 1 150px; min-width: 120px;
+  }
+  .add-source button {
+    font-family: var(--font-sans); font-size: 12.5px; font-weight: 600; background: var(--accent);
+    color: #fff; border: none; border-radius: 6px; padding: 7px 14px; cursor: pointer; white-space: nowrap;
+  }
+  .add-source button:hover { background: var(--accent-strong); }
+  .src-groups { display: flex; flex-direction: column; gap: 10px; max-height: 560px; overflow-y: auto; padding-right: 4px; }
+  .src-group summary {
+    font-size: 12px; font-weight: 600; color: var(--text-secondary); cursor: pointer; padding: 6px 4px;
+    list-style: none; display: flex; align-items: center; gap: 6px;
+  }
+  .src-group summary::-webkit-details-marker { display: none; }
+  .src-group summary::before { content: "▸"; color: var(--text-muted); transition: transform .15s; font-size: 10px; }
+  .src-group[open] summary::before { transform: rotate(90deg); }
+  .src-group summary .src-group-count { font-family: var(--font-mono); color: var(--text-muted); font-weight: 400; }
+  .src-row {
+    display: grid; grid-template-columns: 20px 1fr auto 24px; align-items: center; gap: 10px;
+    padding: 6px 8px; border-radius: 6px; font-size: 12px;
+  }
+  .src-row:hover { background: var(--accent-wash); }
+  .src-row input[type="checkbox"] { accent-color: var(--accent); }
+  .src-row .src-name { color: var(--text-primary); font-weight: 500; }
+  .src-row .src-sritis { color: var(--text-muted); font-size: 10.5px; margin-left: 6px; }
+  .src-row .src-url { color: var(--accent); text-decoration: none; font-family: var(--font-mono); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .src-row .src-url:hover { text-decoration: underline; }
+  .src-row.unmonitored { opacity: .5; }
+  .src-remove {
+    background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 13px;
+    width: 22px; height: 22px; border-radius: 5px; line-height: 1;
+  }
+  .src-remove:hover { background: var(--warning-wash); color: var(--critical); }
 
   /* ---- top signal banner ---- */
   .top-signal {
@@ -323,25 +367,46 @@
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1.5v9M4.5 7l3.5 3.5L11.5 7M2 13h12"/></svg>
         Eksportuoti į .xlsx
       </button>
+      <button class="export-btn ghost" id="sourcesToggleBtn" type="button" aria-expanded="false">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6.5 9.5a2.5 2.5 0 003.5 0l2-2a2.5 2.5 0 00-3.5-3.5l-1 1M9.5 6.5a2.5 2.5 0 00-3.5 0l-2 2a2.5 2.5 0 003.5 3.5l1-1"/></svg>
+        Šaltiniai (<span id="srcCountBtn">96</span>)
+      </button>
     </div>
   </header>
+
+  <div class="panel" id="sourcesPanel" hidden style="margin-bottom:20px;">
+    <div class="src-panel-head">
+      <div>
+        <h2>Stebimi šaltiniai</h2>
+        <p class="hint">Visi registro šaltiniai, kuriuos agentas tikrina. Varnelė = įtrauktas į savaitinę stebėseną. Pakeitimai iš karto išsaugomi ŠIOJE naršyklėje (localStorage); kad jie pasiektų agentą kitą savaitę, atsisiųskite <code>sources.json</code> ir įkelkite jį (arba atsiųskite man) — jis pakeis <code>data/sources.json</code> repozitorijoje.</p>
+      </div>
+      <div class="src-panel-actions">
+        <button type="button" class="chip" id="srcDownloadBtn">⭳ Atsisiųsti sources.json</button>
+        <button type="button" class="chip" id="srcResetBtn">↺ Atstatyti numatytuosius</button>
+      </div>
+    </div>
+    <input class="search" id="srcSearch" type="text" placeholder="Ieškoti šaltinio pagal pavadinimą, sritį ar URL…" style="margin-bottom:12px;">
+    <form id="addSourceForm" class="add-source">
+      <input id="asName" type="text" placeholder="Šaltinio pavadinimas" required>
+      <input id="asUrl" type="url" placeholder="https://..." required>
+      <input id="asKategorija" type="text" placeholder="Kategorija" list="kategorijaList">
+      <input id="asSritis" type="text" placeholder="Sritis (nebūtina)">
+      <button type="submit">+ Pridėti šaltinį</button>
+      <datalist id="kategorijaList"></datalist>
+    </form>
+    <div id="sourcesListHost" class="src-groups"></div>
+  </div>
 
   <div class="top-signal" id="topSignal" hidden></div>
 
   <div class="tiles" id="tiles">
-    <div class="tile"><div class="n accent" id="tProblems">–</div><div class="l">Skirtingų problemų</div><div class="c" id="tProblemsCap"></div></div>
+    <div class="tile"><div class="n" id="tSourcesChecked">–</div><div class="l">Šaltinių patikrinta</div><div class="c" id="tSourcesCheckedCap"></div></div>
+    <div class="tile"><div class="n accent" id="tProblems">–</div><div class="l">Unikalių problemų rasta</div><div class="c" id="tProblemsCap"></div></div>
+    <div class="tile"><div class="n warn" id="tRepeats">–</div><div class="l">Iš jų pasikartoja</div><div class="c" id="tRepeatsCap"></div></div>
     <div class="tile"><div class="n" id="tSignals">–</div><div class="l">Signalų iš viso</div><div class="c" id="tSignalsCap"></div></div>
-    <div class="tile"><div class="n warn" id="tRepeats">–</div><div class="l">Pasikartojančios temos</div><div class="c" id="tRepeatsCap"></div></div>
     <div class="tile"><div class="n" id="tSritys">–</div><div class="l">Paliestos sritys (iš 16)</div><div class="c" id="tSritysCap"></div></div>
-    <div class="tile"><div class="n" id="tSources">–</div><div class="l">Skirtingų šaltinių</div><div class="c" id="tSourcesCap"></div></div>
   </div>
   <p class="tiles-note" id="tilesNote"></p>
-
-  <div class="panel" style="margin-bottom:20px;">
-    <h2>Temų svoris — kiek kartų problema paminėta</h2>
-    <p class="hint">Rikiuojama nuo dažniausiai iki rečiausiai pasikartojančios — tai rodo, kuri konkreti tema (ne visa sritis) turi didžiausią prioritetą. Spustelėję temą, ją rasite sąraše apačioje.</p>
-    <div class="bars" id="weightBarsHost"></div>
-  </div>
 
   <div class="grid2">
     <div class="panel">
@@ -362,6 +427,12 @@
       </div>
       <div class="linechart-wrap" id="lineHost"></div>
     </div>
+  </div>
+
+  <div class="panel" style="margin-bottom:20px;">
+    <h2>Temų svoris — kiek kartų problema paminėta</h2>
+    <p class="hint">Rikiuojama nuo dažniausiai iki rečiausiai pasikartojančios — tai rodo, kuri konkreti tema (ne visa sritis) turi didžiausią prioritetą. Spustelėję temą, ją rasite sąraše apačioje.</p>
+    <div class="bars" id="weightBarsHost"></div>
   </div>
 
   <div class="panel" style="margin-bottom:20px;">
@@ -406,7 +477,7 @@
     "Žemės ir maisto ūkis, kaimo plėtra, žuvininkystė, veterinarija ir žemės tvarkymas"
   ];
 
-  var state = { docs: [], activeSritis: null, query: "", meta: {}, granularity: "week", cumulative: false };
+  var state = { docs: [], activeSritis: null, query: "", meta: {}, granularity: "week", cumulative: false, sources: null, sourcesBase: [] };
 
   function $(id) { return document.getElementById(id); }
   function esc(s) { return (s == null ? "" : String(s)).replace(/[&<>"']/g, function (c) {
@@ -457,26 +528,28 @@
 
   function renderTiles(docs, agg) {
     var extra = agg.totalSignals - docs.length;
+    var checked = state.meta.sourcesChecked;
+    var total = state.meta.sourcesTotal || 96;
+
+    $("tSourcesChecked").textContent = (checked != null ? checked : "?") + " / " + total;
+    $("tSourcesCheckedCap").textContent = agg.sourceCount + " davė bent 1 signalą";
+
     $("tProblems").textContent = docs.length;
-    $("tProblemsCap").textContent = agg.repeats + " kartojasi · " + (docs.length - agg.repeats) + " vienkartinės";
+    $("tProblemsCap").textContent = "iš patikrintų šaltinių straipsnių";
+
+    $("tRepeats").textContent = agg.repeats;
+    $("tRepeatsCap").textContent = "paminėtos ≥ 2 kartus (iš " + docs.length + ")";
 
     $("tSignals").textContent = agg.totalSignals;
     $("tSignalsCap").textContent = docs.length + " problemos + " + extra + " papild. paminėjimai";
-
-    $("tRepeats").textContent = agg.repeats;
-    $("tRepeatsCap").textContent = "paminėtos ≥ 2 kartus";
 
     var touched = Object.keys(agg.bySritis).filter(function (s) { return agg.bySritis[s] > 0; }).length;
     $("tSritys").textContent = touched + " / 16";
     $("tSritysCap").textContent = "sritys, kur rasta ≥ 1 problema";
 
-    $("tSources").textContent = agg.sourceCount;
-    var checked = state.meta.sourcesChecked;
-    $("tSourcesCap").textContent = "kuriuose rasta signalų" + (checked ? " (iš " + checked + "/96 patikrintų)" : "");
-
     $("tilesNote").innerHTML =
-      '<b>' + docs.length + '</b> skirtingos problemos — <b>' + agg.repeats + '</b> iš jų paminėtos pakartotinai ' +
-      '(iš viso +' + extra + ' papildomi paminėjimai) = <b>' + agg.totalSignals + '</b> signalai iš viso.';
+      'Iš <b>' + (checked != null ? checked : "?") + '</b> patikrintų šaltinių rasta <b>' + docs.length + '</b> skirtingos problemos — ' +
+      '<b>' + agg.repeats + '</b> iš jų paminėtos pakartotinai (iš viso +' + extra + ' papildomi paminėjimai) = <b>' + agg.totalSignals + '</b> signalai iš viso.';
   }
 
   function renderTopSignal(docs) {
@@ -638,9 +711,26 @@
     }
 
     var xLabels = "";
+    var lastIdx = series.length - 1;
+    var minLabelGap = 62; // px — enough room for a full ISO date at 9px font
+    var candidates = [];
     series.forEach(function (d, i) {
-      if (series.length > 7 && i % Math.ceil(series.length / 6) !== 0 && i !== series.length - 1) return;
-      xLabels += '<text x="' + x(i) + '" y="' + (h - 8) + '" text-anchor="middle">' + d.key + '</text>';
+      if (series.length > 7 && i % Math.ceil(series.length / 6) !== 0 && i !== lastIdx && i !== 0) return;
+      candidates.push({ i: i, d: d, x: x(i) });
+    });
+    var kept = [];
+    candidates.forEach(function (c) {
+      var isLast = c.i === lastIdx;
+      if (isLast) { kept.push(c); return; }
+      var lastKeptX = kept.length ? kept[kept.length - 1].x : -Infinity;
+      var distToFinal = x(lastIdx) - c.x;
+      if (c.x - lastKeptX < minLabelGap) return;
+      if (distToFinal < minLabelGap) return;
+      kept.push(c);
+    });
+    kept.forEach(function (c) {
+      var anchor = c.i === lastIdx && c.i !== 0 ? "end" : (c.i === 0 ? "start" : "middle");
+      xLabels += '<text x="' + c.x + '" y="' + (h - 8) + '" text-anchor="' + anchor + '">' + c.d.key + '</text>';
     });
 
     var dots = "", hits = "";
@@ -808,6 +898,136 @@
     });
   }
   loadData();
+
+  // ---------------- sources panel (view + local edit + add) ----------------
+
+  var SRC_LS_KEY = "vk-mediju-stebesena.sources.v1";
+
+  function loadLocalSourceEdits() {
+    try { var raw = localStorage.getItem(SRC_LS_KEY); return raw ? JSON.parse(raw) : null; }
+    catch (e) { return null; }
+  }
+  function saveLocalSourceEdits(list) {
+    try { localStorage.setItem(SRC_LS_KEY, JSON.stringify(list)); } catch (e) {}
+  }
+  function sourceKey(s) { return s.url; }
+
+  function loadSources() {
+    fetch("data/sources.json").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (baseList) {
+        state.sourcesBase = baseList;
+        var local = loadLocalSourceEdits();
+        state.sources = local || baseList.slice();
+        $("srcCountBtn").textContent = state.sources.length;
+        var cats = Array.from(new Set(baseList.map(function (s) { return s.kategorija; }).filter(Boolean)));
+        $("kategorijaList").innerHTML = cats.map(function (c) { return '<option value="' + esc(c) + '">'; }).join("");
+        renderSources();
+      })
+      .catch(function () {
+        $("sourcesListHost").innerHTML = '<div class="empty">Nepavyko įkelti data/sources.json.</div>';
+      });
+  }
+
+  function persistSources() {
+    saveLocalSourceEdits(state.sources);
+    $("srcCountBtn").textContent = state.sources.length;
+  }
+
+  function renderSources() {
+    var host = $("sourcesListHost");
+    var q = ($("srcSearch").value || "").toLowerCase();
+    var filtered = state.sources.filter(function (s) {
+      if (!q) return true;
+      return (s.pavadinimas + " " + (s.sritis || "") + " " + s.url + " " + (s.kategorija || "")).toLowerCase().indexOf(q) !== -1;
+    });
+    var groups = {}, order = [];
+    filtered.forEach(function (s) {
+      var k = s.kategorija || "Kita";
+      if (!groups[k]) { groups[k] = []; order.push(k); }
+      groups[k].push(s);
+    });
+    host.innerHTML = "";
+    if (!order.length) { host.innerHTML = '<div class="empty">Šaltinių pagal paiešką nerasta.</div>'; return; }
+    order.forEach(function (k) {
+      var det = document.createElement("details");
+      det.className = "src-group";
+      var monitoredCount = groups[k].filter(function (s) { return s.monitored; }).length;
+      var summary = document.createElement("summary");
+      var countEl = document.createElement("span");
+      countEl.className = "src-group-count";
+      summary.textContent = k + " ";
+      summary.appendChild(countEl);
+      det.appendChild(summary);
+      function refreshCount() {
+        var mCount = groups[k].filter(function (s) { return s.monitored; }).length;
+        countEl.textContent = "(" + groups[k].length + ", įtraukta " + mCount + ")";
+      }
+      refreshCount();
+      groups[k].forEach(function (s) {
+        var row = document.createElement("div");
+        row.className = "src-row" + (s.monitored ? "" : " unmonitored");
+        row.innerHTML =
+          '<input type="checkbox" ' + (s.monitored ? "checked" : "") + '>' +
+          '<span><span class="src-name">' + esc(s.pavadinimas) + '</span><span class="src-sritis">' + esc(s.sritis || "") + '</span></span>' +
+          '<a class="src-url" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.url.replace(/^https?:\/\//, "")) + '</a>' +
+          '<button type="button" class="src-remove" title="Pašalinti">✕</button>';
+        row.querySelector("input").addEventListener("change", function (e) {
+          s.monitored = e.target.checked;
+          row.classList.toggle("unmonitored", !s.monitored);
+          refreshCount();
+          persistSources();
+        });
+        row.querySelector(".src-remove").addEventListener("click", function () {
+          state.sources = state.sources.filter(function (x) { return sourceKey(x) !== sourceKey(s); });
+          persistSources();
+          renderSources();
+        });
+        det.appendChild(row);
+      });
+      host.appendChild(det);
+    });
+  }
+
+  $("sourcesToggleBtn").addEventListener("click", function () {
+    var panel = $("sourcesPanel");
+    var willShow = panel.hidden;
+    panel.hidden = !willShow;
+    this.setAttribute("aria-expanded", String(willShow));
+  });
+  $("srcSearch").addEventListener("input", function () { if (state.sources) renderSources(); });
+  $("srcResetBtn").addEventListener("click", function () {
+    if (!confirm("Panaikinti visus šios naršyklės pakeitimus ir grįžti prie originalaus sąrašo?")) return;
+    try { localStorage.removeItem(SRC_LS_KEY); } catch (e) {}
+    state.sources = state.sourcesBase.slice();
+    renderSources();
+    $("srcCountBtn").textContent = state.sources.length;
+  });
+  $("srcDownloadBtn").addEventListener("click", function () {
+    var blob = new Blob([JSON.stringify(state.sources, null, 2)], { type: "application/json" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "sources.json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+  $("addSourceForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = $("asName").value.trim(), url = $("asUrl").value.trim();
+    if (!name || !url) return;
+    state.sources.push({
+      nr: String(state.sources.length + 1),
+      kategorija: $("asKategorija").value.trim() || "Rankiniu būdu pridėti",
+      pavadinimas: name,
+      sritis: $("asSritis").value.trim(),
+      url: url,
+      monitored: true
+    });
+    persistSources();
+    renderSources();
+    e.target.reset();
+  });
+
+  loadSources();
 
   // ---------------- export (plain browser download — no special capability needed) ----------------
 

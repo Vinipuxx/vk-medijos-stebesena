@@ -1,0 +1,770 @@
+[
+  {
+    "nr": "1",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "LRT",
+    "sritis": "Visos sritys",
+    "url": "https://www.lrt.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "2",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "LRT Tyrimai (rubrika)",
+    "sritis": "Visos sritys",
+    "url": "https://www.lrt.lt/tema/lrt-tyrimai",
+    "monitored": true
+  },
+  {
+    "nr": "3",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "Delfi",
+    "sritis": "Visos sritys",
+    "url": "https://www.delfi.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "4",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "15min",
+    "sritis": "Visos sritys",
+    "url": "https://www.15min.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "5",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "Lrytas",
+    "sritis": "Visos sritys",
+    "url": "https://www.lrytas.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "6",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "TV3",
+    "sritis": "Visos sritys",
+    "url": "https://www.tv3.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "7",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "Alfa",
+    "sritis": "Visos sritys",
+    "url": "https://www.alfa.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "8",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "ELTA",
+    "sritis": "Visos sritys",
+    "url": "https://www.elta.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "9",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "BNS spaudos centras",
+    "sritis": "Visos sritys",
+    "url": "https://sc.bns.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "10",
+    "kategorija": "1. Nacionalinė žiniasklaida",
+    "pavadinimas": "Bernardinai",
+    "sritis": "Socialinė apsauga, kultūra",
+    "url": "https://www.bernardinai.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "11",
+    "kategorija": "2. Verslo ir sektorinė žiniasklaida",
+    "pavadinimas": "Verslo žinios",
+    "sritis": "Finansai, VVĮ, viešieji pirkimai",
+    "url": "https://www.vz.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "12",
+    "kategorija": "2. Verslo ir sektorinė žiniasklaida",
+    "pavadinimas": "IQ",
+    "sritis": "Viešoji politika",
+    "url": "https://iq.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "13",
+    "kategorija": "2. Verslo ir sektorinė žiniasklaida",
+    "pavadinimas": "Valstiečių laikraštis",
+    "sritis": "Žemės ūkis, regionai",
+    "url": "https://www.valstietis.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "14",
+    "kategorija": "2. Verslo ir sektorinė žiniasklaida",
+    "pavadinimas": "Ūkininko patarėjas",
+    "sritis": "Žemės ūkis",
+    "url": "https://ukininkopatarejas.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "15",
+    "kategorija": "3. Tiriamoji žurnalistika",
+    "pavadinimas": "Tiriamosios žurnalistikos centras „Siena“",
+    "sritis": "Korupcija, viešasis valdymas",
+    "url": "https://siena.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "16",
+    "kategorija": "3. Tiriamoji žurnalistika",
+    "pavadinimas": "Laisvės TV",
+    "sritis": "Korupcija, viešasis valdymas",
+    "url": "https://www.laisvestv.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "17",
+    "kategorija": "3. Tiriamoji žurnalistika",
+    "pavadinimas": "Atvira Klaipėda",
+    "sritis": "Savivalda",
+    "url": "https://www.atviraklaipeda.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "18",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Kauno diena",
+    "sritis": "Savivalda, Kauno regionas",
+    "url": "https://kauno.diena.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "19",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Klaipėda (diena.lt)",
+    "sritis": "Savivalda, Klaipėdos regionas",
+    "url": "https://klaipeda.diena.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "20",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Vakarų ekspresas",
+    "sritis": "Savivalda, Klaipėdos regionas",
+    "url": "https://ve.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "21",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Šiaulių kraštas",
+    "sritis": "Savivalda, Šiaulių regionas",
+    "url": "https://www.skrastas.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "22",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Sekundė",
+    "sritis": "Savivalda, Panevėžio regionas",
+    "url": "https://www.sekunde.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "23",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Etaplius",
+    "sritis": "Savivalda, Šiaulių regionas",
+    "url": "https://www.etaplius.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "24",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Kas vyksta Kaune",
+    "sritis": "Savivalda, Kaunas",
+    "url": "https://kaunas.kasvyksta.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "25",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Made in Vilnius",
+    "sritis": "Savivalda, Vilnius",
+    "url": "https://madeinvilnius.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "26",
+    "kategorija": "4. Regioninė žiniasklaida (didmiesčiai)",
+    "pavadinimas": "Alytus plius",
+    "sritis": "Savivalda, Alytaus regionas",
+    "url": "https://www.alytusplius.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "27",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Alytaus naujienos",
+    "sritis": "Alytaus r.",
+    "url": "https://www.alytausnaujienos.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "28",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Anykšta",
+    "sritis": "Anykščių r.",
+    "url": "https://www.anyksta.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "29",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Banga",
+    "sritis": "Klaipėdos r. (Gargždai)",
+    "url": "https://gargzdai.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "30",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Bičiulis",
+    "sritis": "Kelmės r.",
+    "url": "https://www.biciulis.net/",
+    "monitored": true
+  },
+  {
+    "nr": "31",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Elektrėnų kronika",
+    "sritis": "Elektrėnų sav.",
+    "url": "https://www.kronika.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "32",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Gimtasis Rokiškis",
+    "sritis": "Rokiškio r.",
+    "url": "https://www.grokiskis.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "33",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Gimtoji žemė",
+    "sritis": "Ukmergės r.",
+    "url": "https://www.gzeme.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "34",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Gyvenimas",
+    "sritis": "Prienų r., Birštono sav.",
+    "url": "https://www.gyvenimas.eu/",
+    "monitored": true
+  },
+  {
+    "nr": "35",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Kupiškėnų mintys",
+    "sritis": "Kupiškio r.",
+    "url": "https://kmintys.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "36",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Merkio kraštas",
+    "sritis": "Varėnos r.",
+    "url": "https://merkiokrastas.com/",
+    "monitored": true
+  },
+  {
+    "nr": "37",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Mūsų laikas",
+    "sritis": "Jurbarko r.",
+    "url": "https://www.mlaikas.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "38",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Mūsų žodis",
+    "sritis": "Skuodo r.",
+    "url": "https://www.musu-zodis.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "39",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Pajūrio naujienos",
+    "sritis": "Kretingos r.",
+    "url": "https://www.pajurionaujienos.com/",
+    "monitored": true
+  },
+  {
+    "nr": "40",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Panevėžio kraštas",
+    "sritis": "Panevėžio r.",
+    "url": "https://panskliautas.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "41",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Plungė",
+    "sritis": "Plungės r., Rietavo sav.",
+    "url": "https://laikrastisplunge.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "42",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Rinkos aikštė",
+    "sritis": "Kėdainių r.",
+    "url": "https://rinkosaikste.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "43",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Santaka",
+    "sritis": "Vilkaviškio r.",
+    "url": "https://santaka.info/",
+    "monitored": true
+  },
+  {
+    "nr": "44",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Santarvė",
+    "sritis": "Mažeikių r.",
+    "url": "https://www.santarve.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "45",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Suvalkietis",
+    "sritis": "Marijampolės apskr.",
+    "url": "https://www.suvalkietis.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "46",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Šiaurės rytai",
+    "sritis": "Biržų r.",
+    "url": "https://siaure.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "47",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Šilalės artojas",
+    "sritis": "Šilalės r.",
+    "url": "https://silales-artojas.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "48",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Šilutės naujienos",
+    "sritis": "Šilutės r.",
+    "url": "https://www.silutesnaujienos.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "49",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Šviesa",
+    "sritis": "Jurbarko r.",
+    "url": "https://jurbarkosviesa.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "50",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Tauragės kurjeris",
+    "sritis": "Tauragės r.",
+    "url": "https://kurjeris.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "51",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Telšių žinios",
+    "sritis": "Telšių apskr.",
+    "url": "https://tzinios.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "52",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Ukmergės žinios",
+    "sritis": "Ukmergės r.",
+    "url": "https://www.ukzinios.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "53",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Utenos diena",
+    "sritis": "Utenos r.",
+    "url": "https://udiena.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "54",
+    "kategorija": "5. Regioninė žiniasklaida (rajonai)",
+    "pavadinimas": "Vienybė",
+    "sritis": "Akmenės r.",
+    "url": "http://www.avienybe.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "55",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Lietuvos Respublikos Vyriausybė",
+    "sritis": "Visos sritys",
+    "url": "https://lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "56",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Vyriausybės posėdžiai ir pasitarimai",
+    "sritis": "Visos sritys",
+    "url": "https://lrv.lt/lt/posedziai/",
+    "monitored": true
+  },
+  {
+    "nr": "57",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Lietuvos Respublikos Seimas",
+    "sritis": "Visos sritys",
+    "url": "https://www.lrs.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "58",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Seimo naujienos ir pranešimai spaudai",
+    "sritis": "Visos sritys",
+    "url": "https://www.lrs.lt/sip/portal.show?p_r=35403&p_k=1",
+    "monitored": true
+  },
+  {
+    "nr": "59",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Teisės aktų registras (TAR)",
+    "sritis": "Visos sritys",
+    "url": "https://www.e-tar.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "60",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Teisės aktų ir projektų paieška (e-Seimas)",
+    "sritis": "Visos sritys",
+    "url": "https://e-seimas.lrs.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "61",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Respublikos Prezidentas",
+    "sritis": "Visos sritys",
+    "url": "https://www.lrp.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "62",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Aplinkos ministerija",
+    "sritis": "Aplinka, statyba, būstas",
+    "url": "https://am.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "63",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Ekonomikos ir inovacijų ministerija",
+    "sritis": "Ekonomika, inovacijos",
+    "url": "https://eimin.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "64",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Energetikos ministerija",
+    "sritis": "Energetika",
+    "url": "https://enmin.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "65",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Finansų ministerija",
+    "sritis": "Finansai, biudžetas, ES fondai",
+    "url": "https://finmin.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "66",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Krašto apsaugos ministerija",
+    "sritis": "Gynyba",
+    "url": "https://kam.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "67",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Kultūros ministerija",
+    "sritis": "Kultūra, žiniasklaida",
+    "url": "https://lrkm.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "68",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Socialinės apsaugos ir darbo ministerija",
+    "sritis": "Socialinė apsauga, darbas",
+    "url": "https://socmin.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "69",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Susisiekimo ministerija",
+    "sritis": "Transportas, ryšiai",
+    "url": "https://sumin.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "70",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Sveikatos apsaugos ministerija",
+    "sritis": "Sveikata",
+    "url": "https://sam.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "71",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Švietimo, mokslo ir sporto ministerija",
+    "sritis": "Švietimas, mokslas, sportas",
+    "url": "https://smsm.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "72",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Teisingumo ministerija",
+    "sritis": "Teisingumas",
+    "url": "https://tm.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "73",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Užsienio reikalų ministerija",
+    "sritis": "Užsienio politika",
+    "url": "https://www.urm.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "74",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Vidaus reikalų ministerija",
+    "sritis": "Vidaus reikalai, savivalda, viešasis valdymas",
+    "url": "https://vrm.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "75",
+    "kategorija": "6. Valdžios institucijos",
+    "pavadinimas": "Žemės ūkio ministerija",
+    "sritis": "Žemės ūkis",
+    "url": "https://zum.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "76",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Seimo kontrolierių įstaiga",
+    "sritis": "Viešasis administravimas, žmogaus teisės",
+    "url": "https://www.lrski.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "77",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Lygių galimybių kontrolieriaus tarnyba",
+    "sritis": "Diskriminacija, paslaugų prieinamumas",
+    "url": "https://lygybe.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "78",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Vaiko teisių apsaugos kontrolieriaus įstaiga",
+    "sritis": "Vaiko teisės, globa, švietimas",
+    "url": "https://vtaki.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "79",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Specialiųjų tyrimų tarnyba (STT)",
+    "sritis": "Korupcijos rizikos",
+    "url": "https://www.stt.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "80",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Vyriausioji tarnybinės etikos komisija (VTEK)",
+    "sritis": "Interesų konfliktai",
+    "url": "https://www.vtek.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "81",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Viešųjų pirkimų tarnyba",
+    "sritis": "Viešieji pirkimai",
+    "url": "https://vpt.lrv.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "82",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Konkurencijos taryba",
+    "sritis": "Konkurencija, VVĮ",
+    "url": "https://kt.gov.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "83",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Valstybinė darbo inspekcija",
+    "sritis": "Darbo santykiai, sauga",
+    "url": "https://vdi.lrv.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "84",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Valstybinė duomenų apsaugos inspekcija",
+    "sritis": "Asmens duomenys",
+    "url": "https://vdai.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "85",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Nacionalinis kibernetinio saugumo centras",
+    "sritis": "Kibernetinis saugumas",
+    "url": "https://nksc.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "86",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Vyriausybės atstovų įstaiga",
+    "sritis": "Savivalda",
+    "url": "https://vaistaiga.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "87",
+    "kategorija": "7. Kontrolė ir priežiūra",
+    "pavadinimas": "Valstybės kontrolė",
+    "sritis": "Visos sritys",
+    "url": "https://www.valstybeskontrole.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "88",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "Valstybės duomenų agentūra",
+    "sritis": "Statistika",
+    "url": "https://vda.lrv.lt/lt/",
+    "monitored": true
+  },
+  {
+    "nr": "89",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "Vyriausybės strateginės analizės centras (STRATA)",
+    "sritis": "Viešoji politika",
+    "url": "https://strata.gov.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "90",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "Lietuvos bankas",
+    "sritis": "Makroekonomika, finansų stabilumas",
+    "url": "https://www.lb.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "91",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "Sodra",
+    "sritis": "Socialinis draudimas, pajamos",
+    "url": "https://www.sodra.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "92",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "Užimtumo tarnyba",
+    "sritis": "Darbo rinka",
+    "url": "https://uzt.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "93",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "Valstybinė ligonių kasa",
+    "sritis": "Sveikatos finansavimas",
+    "url": "https://ligoniukasa.lrv.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "94",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "Lietuvos savivaldybių asociacija",
+    "sritis": "Savivalda",
+    "url": "https://www.lsa.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "95",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "„Transparency International“ Lietuvos skyrius",
+    "sritis": "Skaidrumas",
+    "url": "https://www.transparency.lt/",
+    "monitored": true
+  },
+  {
+    "nr": "96",
+    "kategorija": "8. Analitika ir duomenys",
+    "pavadinimas": "Lietuvos laisvosios rinkos institutas",
+    "sritis": "Reguliavimas, savivalda",
+    "url": "https://www.llri.lt/",
+    "monitored": true
+  }
+]
