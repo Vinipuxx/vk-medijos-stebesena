@@ -30,6 +30,15 @@
     --warning-wash: rgba(201,133,0,.12);
     --critical: #d03b3b;
     --chip-bg: #eeede8;
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --series-4: #eda100;
+    --series-5: #e87ba4;
+    --series-6: #008300;
+    --series-7: #4a3aa7;
+    --series-8: #e34948;
+    --series-other: #8a887f;
     --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   }
@@ -54,6 +63,15 @@
       --warning-wash: rgba(224,165,46,.14);
       --critical: #e66767;
       --chip-bg: #24272a;
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --series-3: #199e70;
+      --series-4: #c98500;
+      --series-5: #d55181;
+      --series-6: #008300;
+      --series-7: #9085e9;
+      --series-8: #e66767;
+      --series-other: #706e66;
     }
   }
   :root[data-theme="dark"] {
@@ -76,6 +94,15 @@
     --warning-wash: rgba(224,165,46,.14);
     --critical: #e66767;
     --chip-bg: #24272a;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --series-other: #706e66;
   }
 
   * { box-sizing: border-box; }
@@ -168,17 +195,6 @@
   }
   .src-remove:hover { background: var(--warning-wash); color: var(--critical); }
 
-  /* ---- top signal banner ---- */
-  .top-signal {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    background: var(--warning-wash); border: 1px solid var(--warning);
-    border-radius: 9px; padding: 10px 14px; margin-bottom: 18px;
-    font-size: 13px; color: var(--text-primary);
-  }
-  .top-signal[hidden] { display: none; }
-  .top-signal .ts-icon { color: var(--warning); font-weight: 700; }
-  .top-signal .ts-sritis { color: var(--text-muted); font-size: 12px; }
-
   /* ---- stat tiles ---- */
   .tiles {
     display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
@@ -200,8 +216,6 @@
   .tiles-note b { color: var(--text-secondary); font-weight: 600; }
 
   /* ---- panels ---- */
-  .grid2 { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; margin-bottom: 20px; align-items: start; }
-  @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
   .panel {
     background: var(--surface-raised); border: 1px solid var(--border); border-radius: 10px;
     padding: 18px 20px 20px;
@@ -258,17 +272,11 @@
   svg.linechart { width: 100%; height: 210px; overflow: visible; }
   .lc-grid line { stroke: var(--gridline); stroke-width: 1; }
   .lc-axis text { fill: var(--text-muted); font-family: var(--font-mono); font-size: 9px; }
-  .lc-area { fill: var(--accent-line); opacity: .12; }
-  .lc-line { fill: none; stroke: var(--accent-line); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .lc-dot { fill: var(--surface-raised); stroke: var(--accent-line); stroke-width: 2; }
-  .lc-dot.spike { fill: var(--warning); stroke: var(--warning); }
-  .lc-tooltip {
-    position: absolute; pointer-events: none; background: var(--text-primary); color: var(--surface-1);
-    font-family: var(--font-mono); font-size: 10.5px; padding: 6px 9px; border-radius: 5px;
-    transform: translate(-50%, -115%); white-space: nowrap; opacity: 0; transition: opacity .1s;
-    z-index: 5; max-width: 320px; white-space: normal;
-  }
-  .lc-hit { fill: transparent; }
+  .lc-bar-seg { stroke: var(--surface-raised); stroke-width: 1; }
+  .lc-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .lc-legend-item { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-secondary); }
+  .lc-legend-swatch { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .lc-legend-item b { color: var(--text-primary); font-family: var(--font-mono); font-weight: 600; }
 
   /* ---- filter row ---- */
   .filterbar {
@@ -367,8 +375,6 @@
     </div>
     <div class="run-meta">
       <div>Paskutinis rinkimas: <b id="metaRunDate">—</b></div>
-      <div>Šaltinių registre: <b>96</b> (<span id="metaChecked">—</span> patikrinta)</div>
-      <div id="metaScope" style="max-width:240px; text-align:right;"></div>
       <button class="export-btn" id="exportBtn" disabled>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1.5v9M4.5 7l3.5 3.5L11.5 7M2 13h12"/></svg>
         Eksportuoti į .xlsx
@@ -406,8 +412,6 @@
     <div id="sourcesListHost" class="src-groups"></div>
   </div>
 
-  <div class="top-signal" id="topSignal" hidden></div>
-
   <div class="tiles" id="tiles">
     <div class="tile"><div class="n" id="tSourcesChecked">–</div><div class="l">Šaltinių patikrinta</div><div class="c" id="tSourcesCheckedCap"></div></div>
     <div class="tile"><div class="n accent" id="tProblems">–</div><div class="l">Unikalių problemų rasta</div><div class="c" id="tProblemsCap"></div></div>
@@ -417,25 +421,26 @@
   </div>
   <p class="tiles-note" id="tilesNote"></p>
 
-  <div class="grid2">
-    <div class="panel">
-      <h2>Probleminės temos pagal viešojo valdymo sritį</h2>
-      <p class="hint">Spustelėkite sritį, kad išfiltruotumėte sąrašą apačioje.</p>
-      <div class="bars" id="barsHost"></div>
-    </div>
-    <div class="panel">
-      <h2>Signalų dinamika</h2>
-      <p class="hint" id="lineHint">—</p>
-      <div class="chart-controls">
-        <div class="seg" id="granSeg">
-          <button type="button" data-g="week" class="active">Savaitė</button>
-          <button type="button" data-g="month">Mėnuo</button>
-          <button type="button" data-g="year">Metai</button>
-        </div>
-        <label class="cumu-toggle"><input type="checkbox" id="cumuToggle"> Kaupiamai (nuo pradžios)</label>
+  <div class="panel" style="margin-bottom:20px;">
+    <h2>Probleminės temos pagal viešojo valdymo sritį</h2>
+    <p class="hint">Spustelėkite sritį, kad išfiltruotumėte sąrašą apačioje.</p>
+    <div class="bars" id="barsHost"></div>
+  </div>
+
+  <div class="panel" style="margin-bottom:20px;">
+    <h2>Signalų dinamika</h2>
+    <p class="hint" id="lineHint">—</p>
+    <div class="chart-controls">
+      <div class="seg" id="granSeg">
+        <button type="button" data-g="week" class="active">Savaitė</button>
+        <button type="button" data-g="month">Mėnuo</button>
+        <button type="button" data-g="quarter">Ketvirtis</button>
+        <button type="button" data-g="year">Metai</button>
       </div>
-      <div class="linechart-wrap" id="lineHost"></div>
+      <label class="cumu-toggle"><input type="checkbox" id="cumuToggle"> Kaupiamai (nuo pradžios)</label>
     </div>
+    <div class="linechart-wrap" id="lineHost"></div>
+    <div class="lc-legend" id="lcLegend"></div>
   </div>
 
   <div class="panel" style="margin-bottom:20px;">
@@ -567,19 +572,6 @@
       '<b>' + agg.repeats + '</b> iš jų paminėtos pakartotinai (iš viso +' + extra + ' papildomi paminėjimai) = <b>' + agg.totalSignals + '</b> signalai iš viso.';
   }
 
-  function renderTopSignal(docs) {
-    var el = $("topSignal");
-    var withRepeats = docs.filter(function (p) { return p.occurrences && p.occurrences.length > 1; });
-    if (!withRepeats.length) { el.hidden = true; return; }
-    withRepeats.sort(function (a, b) { return b.occurrences.length - a.occurrences.length; });
-    var top = withRepeats[0];
-    el.hidden = false;
-    el.innerHTML =
-      '<span class="ts-icon">⚠</span> Daugiausiai kartojasi: <b>' + esc(top.title) + '</b> — paminėta ' +
-      top.occurrences.length + ' kartus nuo ' + fmtDate(top.firstSeen) +
-      ' <span class="ts-sritis">(' + esc(top.sritis) + ')</span>';
-  }
-
   function selectProblem(title) {
     state.activeSritis = null;
     state.query = title;
@@ -641,38 +633,46 @@
     });
   }
 
-  // ---------------- line chart: week / month / year, optional cumulative ----------------
+  // ---------------- signal dynamics: stacked bars by sritis, week/month/quarter/year, optional cumulative ----------------
+
+  var CHART_COLOR_VARS = ["--series-1", "--series-2", "--series-3", "--series-4", "--series-5", "--series-6", "--series-7", "--series-8"];
 
   function bucketKeyFor(dateStr, g) {
     if (g === "year") return dateStr.slice(0, 4);
+    if (g === "quarter") {
+      var dq = new Date(dateStr + "T00:00:00Z");
+      return dq.getUTCFullYear() + "-Q" + (Math.floor(dq.getUTCMonth() / 3) + 1);
+    }
     if (g === "month") return dateStr.slice(0, 7);
     return isoWeekMonday(dateStr).toISOString().slice(0, 10);
   }
   function bucketStartDate(key, g) {
     if (g === "year") return new Date(Date.UTC(parseInt(key, 10), 0, 1));
+    if (g === "quarter") {
+      var pq = key.split("-Q");
+      return new Date(Date.UTC(parseInt(pq[0], 10), (parseInt(pq[1], 10) - 1) * 3, 1));
+    }
     if (g === "month") { var p = key.split("-"); return new Date(Date.UTC(parseInt(p[0], 10), parseInt(p[1], 10) - 1, 1)); }
     return new Date(key + "T00:00:00Z");
   }
   function bucketNext(d, g) {
     var n = new Date(d);
     if (g === "year") n.setUTCFullYear(n.getUTCFullYear() + 1);
+    else if (g === "quarter") n.setUTCMonth(n.getUTCMonth() + 3);
     else if (g === "month") n.setUTCMonth(n.getUTCMonth() + 1);
     else n.setUTCDate(n.getUTCDate() + 7);
     return n;
   }
   function bucketLabel(d, g) {
     if (g === "year") return String(d.getUTCFullYear());
+    if (g === "quarter") return d.getUTCFullYear() + "-Q" + (Math.floor(d.getUTCMonth() / 3) + 1);
     if (g === "month") return d.getUTCFullYear() + "-" + String(d.getUTCMonth() + 1).padStart(2, "0");
     return d.toISOString().slice(0, 10);
   }
 
   function updateLineChart() {
-    var granHints = {
-      week: "Kiekvienas taškas — savaitės (nuo pirmadienio) naujų + pasikartojančių signalų skaičius.",
-      month: "Kiekvienas taškas — mėnesio naujų + pasikartojančių signalų skaičius.",
-      year: "Kiekvienas taškas — metų naujų + pasikartojančių signalų skaičius."
-    };
-    var hint = granHints[state.granularity];
+    var granNouns = { week: "savaitės", month: "mėnesio", quarter: "ketvirčio", year: "metų" };
+    var hint = "Kiekvienas stulpelis — " + granNouns[state.granularity] + " naujų + pasikartojančių signalų skaičius, spalvos rodo sritį (žr. legendą apačioje).";
     if (state.cumulative) hint += " Rodoma kaupiamai (bendra suma nuo pirmo užfiksuoto signalo).";
     $("lineHint").textContent = hint;
     renderLineChart(buildEvents(state.docs), state.granularity, state.cumulative);
@@ -680,15 +680,23 @@
 
   function renderLineChart(events, granularity, cumulative) {
     var host = $("lineHost");
+    $("lcLegend").innerHTML = "";
     if (!events.length) { host.innerHTML = '<div class="empty" style="padding:30px 0;">Nėra datuotų signalų</div>'; return; }
+
+    // stabili sritis -> spalva žemėlapis: pagal kanoninę SRITYS tvarką, ne pagal dažnį
+    var totalsBySritis = {};
+    events.forEach(function (e) { totalsBySritis[e.sritis] = (totalsBySritis[e.sritis] || 0) + 1; });
+    var activeInCanonicalOrder = SRITYS.filter(function (s) { return totalsBySritis[s] > 0; });
+    var colorMap = {};
+    activeInCanonicalOrder.forEach(function (s, i) {
+      colorMap[s] = i < 8 ? "var(" + CHART_COLOR_VARS[i] + ")" : "var(--series-other)";
+    });
 
     var buckets = {};
     events.forEach(function (e) {
       var k = bucketKeyFor(e.date, granularity);
-      if (!buckets[k]) buckets[k] = { count: 0, bySritis: {} };
-      buckets[k].count++;
-      var sk = sritisShort(e.sritis);
-      buckets[k].bySritis[sk] = (buckets[k].bySritis[sk] || 0) + 1;
+      if (!buckets[k]) buckets[k] = {};
+      buckets[k][e.sritis] = (buckets[k][e.sritis] || 0) + 1;
     });
 
     var keys = Object.keys(buckets);
@@ -699,26 +707,38 @@
     var cursor = new Date(minD);
     while (cursor <= maxD) {
       var k = bucketLabel(cursor, granularity);
-      var b = buckets[k];
-      series.push({ key: k, date: new Date(cursor), count: b ? b.count : 0, bySritis: b ? b.bySritis : {} });
+      series.push({ key: k, date: new Date(cursor), bySritis: buckets[k] || {} });
       cursor = bucketNext(cursor, granularity);
     }
-    if (cumulative) {
-      var running = 0;
-      series.forEach(function (d) { running += d.count; d.displayCount = running; });
-    } else {
-      series.forEach(function (d) { d.displayCount = d.count; });
-    }
+
+    // segmentai kiekvienam stulpeliui, fiksuota sritis tvarka (kaupiama, jei pasirinkta)
+    var runningBySritis = {};
+    series.forEach(function (d) {
+      d.segments = [];
+      d.total = 0;
+      activeInCanonicalOrder.forEach(function (s) {
+        var raw = d.bySritis[s] || 0;
+        if (cumulative) {
+          runningBySritis[s] = (runningBySritis[s] || 0) + raw;
+          var val = runningBySritis[s];
+          if (val > 0) d.segments.push({ sritis: s, value: val });
+          d.total += val;
+        } else {
+          if (raw > 0) d.segments.push({ sritis: s, value: raw });
+          d.total += raw;
+        }
+      });
+      if (!cumulative) d.rawTotal = d.total;
+    });
 
     var w = 520, h = 190, padL = 30, padR = 10, padT = 14, padB = 26;
     var plotW = w - padL - padR, plotH = h - padT - padB;
-    var maxC = Math.max.apply(null, series.map(function (d) { return d.displayCount; }).concat([2]));
-    var stepX = series.length > 1 ? plotW / (series.length - 1) : 0;
-    function x(i) { return padL + i * stepX; }
+    var maxC = Math.max.apply(null, series.map(function (d) { return d.total; }).concat([2]));
+    var n = series.length;
+    var slot = plotW / n;
+    var barW = Math.max(2, Math.min(28, slot - Math.max(1, slot * 0.18)));
+    function x(i) { return padL + i * slot + (slot - barW) / 2; }
     function y(v) { return padT + plotH - (v / maxC) * plotH; }
-
-    var linePts = series.map(function (d, i) { return x(i) + "," + y(d.displayCount); }).join(" L ");
-    var areaPts = "M " + x(0) + "," + y(0) + " L " + linePts + " L " + x(series.length - 1) + "," + (padT + plotH) + " L " + x(0) + "," + (padT + plotH) + " Z";
 
     var gridLines = "", yLabels = "";
     var ticks = maxC <= 4 ? maxC : 4;
@@ -730,21 +750,19 @@
     }
 
     var xLabels = "";
-    var lastIdx = series.length - 1;
-    var minLabelGap = 62; // px — enough room for a full ISO date at 9px font
+    var lastIdx = n - 1;
+    var minLabelGap = 62;
     var candidates = [];
     series.forEach(function (d, i) {
-      if (series.length > 7 && i % Math.ceil(series.length / 6) !== 0 && i !== lastIdx && i !== 0) return;
-      candidates.push({ i: i, d: d, x: x(i) });
+      if (n > 7 && i % Math.ceil(n / 6) !== 0 && i !== lastIdx && i !== 0) return;
+      candidates.push({ i: i, d: d, x: x(i) + barW / 2 });
     });
     var kept = [];
     candidates.forEach(function (c) {
-      var isLast = c.i === lastIdx;
-      if (isLast) { kept.push(c); return; }
+      if (c.i === lastIdx) { kept.push(c); return; }
       var lastKeptX = kept.length ? kept[kept.length - 1].x : -Infinity;
-      var distToFinal = x(lastIdx) - c.x;
       if (c.x - lastKeptX < minLabelGap) return;
-      if (distToFinal < minLabelGap) return;
+      if (x(lastIdx) + barW / 2 - c.x < minLabelGap) return;
       kept.push(c);
     });
     kept.forEach(function (c) {
@@ -752,48 +770,30 @@
       xLabels += '<text x="' + c.x + '" y="' + (h - 8) + '" text-anchor="' + anchor + '">' + c.d.key + '</text>';
     });
 
-    var dots = "", hits = "";
-    var maxRaw = Math.max.apply(null, series.map(function (d) { return d.count; }).concat([1]));
+    var bars = "";
     series.forEach(function (d, i) {
-      var isSpike = !cumulative && d.count > 0 && d.count >= Math.max(2, maxRaw - 1);
-      dots += '<circle class="lc-dot' + (isSpike ? ' spike' : '') + '" cx="' + x(i) + '" cy="' + y(d.displayCount) + '" r="' + (isSpike ? 4.5 : 3) + '"/>';
-      hits += '<rect class="lc-hit" data-i="' + i + '" x="' + (x(i) - stepX / 2) + '" y="0" width="' + (stepX || plotW) + '" height="' + h + '"/>';
+      var yCursor = padT + plotH;
+      d.segments.forEach(function (seg) {
+        var segH = (seg.value / maxC) * plotH;
+        yCursor -= segH;
+        bars += '<rect class="lc-bar-seg" x="' + x(i) + '" y="' + yCursor + '" width="' + barW + '" height="' + Math.max(0, segH) +
+          '" style="fill:' + colorMap[seg.sritis] + '"><title>' + esc(d.key) + " · " + esc(sritisShort(seg.sritis)) + ": " + seg.value + '</title></rect>';
+      });
     });
 
     host.innerHTML =
       '<svg class="linechart" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="xMidYMid meet">' +
         '<g class="lc-grid">' + gridLines + '</g>' +
-        '<path class="lc-area" d="' + areaPts + '"/>' +
-        '<path class="lc-line" d="M ' + linePts + '"/>' +
-        dots +
+        bars +
         '<g class="lc-axis">' + yLabels + xLabels + '</g>' +
-        '<g>' + hits + '</g>' +
-      '</svg>' +
-      '<div class="lc-tooltip" id="lcTooltip"></div>';
+      '</svg>';
 
-    var tooltip = $("lcTooltip");
-    var svgEl = host.querySelector("svg");
-    host.querySelectorAll(".lc-hit").forEach(function (rectEl) {
-      rectEl.addEventListener("mousemove", function () {
-        var i = parseInt(rectEl.getAttribute("data-i"), 10);
-        var d = series[i];
-        var bbox = svgEl.getBoundingClientRect();
-        var scale = bbox.width / w;
-        tooltip.style.left = (x(i) * scale) + "px";
-        tooltip.style.top = (y(d.displayCount) * scale) + "px";
-        tooltip.style.opacity = 1;
-        var parts = Object.keys(d.bySritis).sort(function (a, b) { return d.bySritis[b] - d.bySritis[a]; })
-          .map(function (s) { return s + " " + d.bySritis[s]; });
-        var head = cumulative
-          ? d.key + " · kaupiama suma: " + d.displayCount
-          : d.key + " · " + d.count + " signalas(-ai)";
-        var ownPart = parts.length
-          ? (cumulative ? " — šiuo periodu (+" + d.count + "): " : " — ") + parts.join(" · ")
-          : "";
-        tooltip.textContent = head + ownPart;
-      });
-      rectEl.addEventListener("mouseleave", function () { tooltip.style.opacity = 0; });
-    });
+    // legenda: dažniausiai pasitaikančios sritys viršuje
+    var legendOrder = activeInCanonicalOrder.slice().sort(function (a, b) { return totalsBySritis[b] - totalsBySritis[a]; });
+    $("lcLegend").innerHTML = legendOrder.map(function (s) {
+      return '<span class="lc-legend-item"><span class="lc-legend-swatch" style="background:' + colorMap[s] + '"></span>' +
+        esc(s) + ' <b>' + totalsBySritis[s] + '</b></span>';
+    }).join("");
   }
 
   $("granSeg").querySelectorAll("button").forEach(function (btn) {
@@ -891,7 +891,6 @@
   function renderAll() {
     var agg = computeAggregates(state.docs);
     renderTiles(state.docs, agg);
-    renderTopSignal(state.docs);
     renderWeightBars(state.docs);
     renderBars(agg);
     updateLineChart();
@@ -943,8 +942,6 @@
         problemsFound: m.problems_found, scopeNote: m.scope_note, runType: m.run_type
       };
       if (state.meta.lastRunDate) $("metaRunDate").textContent = fmtDate(state.meta.lastRunDate);
-      if (state.meta.sourcesChecked != null) $("metaChecked").textContent = state.meta.sourcesChecked;
-      if (state.meta.scopeNote) $("metaScope").textContent = state.meta.scopeNote;
       renderTiles(state.docs, computeAggregates(state.docs));
     }).catch(function () {});
   }
