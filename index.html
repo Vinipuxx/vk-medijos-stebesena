@@ -125,6 +125,12 @@
   .src-panel-head .hint { max-width: 62ch; }
   .src-panel-actions { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; }
   .src-panel-head code { font-family: var(--font-mono); font-size: 11px; background: var(--chip-bg); padding: 1px 5px; border-radius: 4px; }
+  .pin-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .pin-row input[type="password"] {
+    font-family: var(--font-mono); font-size: 12.5px; padding: 7px 10px; border-radius: 6px;
+    border: 1px solid var(--border); background: var(--surface-raised); color: var(--text-primary);
+    width: 160px;
+  }
   .add-source { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; padding: 10px; background: var(--page-plane); border-radius: 8px; border: 1px solid var(--border); }
   .add-source input {
     font-family: var(--font-sans); font-size: 12.5px; padding: 7px 10px; border-radius: 6px;
@@ -378,12 +384,15 @@
     <div class="src-panel-head">
       <div>
         <h2>Stebimi šaltiniai</h2>
-        <p class="hint">Visi registro šaltiniai, kuriuos agentas tikrina. Varnelė = įtrauktas į savaitinę stebėseną. Pakeitimai iš karto išsaugomi ŠIOJE naršyklėje (localStorage); kad jie pasiektų agentą kitą savaitę, atsisiųskite <code>sources.json</code> ir įkelkite jį (arba atsiųskite man) — jis pakeis <code>data/sources.json</code> repozitorijoje.</p>
+        <p class="hint">Visi registro šaltiniai, kuriuos agentas tikrina — gyvi duomenys iš duomenų bazės, matomi visiems iš karto. Varnelė = įtrauktas į savaitinę stebėseną. Pridėti, pašalinti ar keisti gali tik įvedus PIN kodą.</p>
       </div>
       <div class="src-panel-actions">
         <button type="button" class="chip" id="srcDownloadBtn">⭳ Atsisiųsti sources.json</button>
-        <button type="button" class="chip" id="srcResetBtn">↺ Atstatyti numatytuosius</button>
       </div>
+    </div>
+    <div class="pin-row">
+      <input id="editPinInput" type="password" placeholder="PIN kodas redagavimui" autocomplete="off">
+      <label class="cumu-toggle"><input type="checkbox" id="editPinRemember"> Įsiminti šioje naršyklėje</label>
     </div>
     <input class="search" id="srcSearch" type="text" placeholder="Ieškoti šaltinio pagal pavadinimą, sritį ar URL…" style="margin-bottom:12px;">
     <form id="addSourceForm" class="add-source">
@@ -454,9 +463,15 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 (function () {
   "use strict";
+
+  var SUPABASE_URL = "https://umffyalovfqbajzrrdgu.supabase.co";
+  var SUPABASE_PUBLISHABLE_KEY = "sb_publishable_3NaCl0XgbEuIIxzMl25DcA_9M_Bdp0j";
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  var PIN_LS_KEY = "vk-mediju-stebesena.editpin.v1";
 
   var SRITYS = [
     "Aplinka, miškai ir klimato kaita",
@@ -477,7 +492,7 @@
     "Žemės ir maisto ūkis, kaimo plėtra, žuvininkystė, veterinarija ir žemės tvarkymas"
   ];
 
-  var state = { docs: [], activeSritis: null, query: "", meta: {}, granularity: "week", cumulative: false, sources: null, sourcesBase: [] };
+  var state = { docs: [], activeSritis: null, query: "", meta: {}, granularity: "week", cumulative: false, sources: null };
 
   function $(id) { return document.getElementById(id); }
   function esc(s) { return (s == null ? "" : String(s)).replace(/[&<>"']/g, function (c) {
@@ -880,58 +895,97 @@
     renderList(state.docs);
   });
 
-  // ---------------- data loading (static JSON, no backend / no sign-in needed) ----------------
+  // ---------------- data loading (Supabase — live database, public read) ----------------
 
-  function loadData() {
-    Promise.all([
-      fetch("data/problems.json").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }),
-      fetch("data/meta.json").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).catch(function () { return {}; })
-    ]).then(function (results) {
-      state.docs = (results[0] || []).filter(function (d) { return d && d.title; });
-      state.meta = results[1] || {};
+  function mapProblemRow(row) {
+    return {
+      id: row.id,
+      title: row.title,
+      description: row.description,
+      sritis: row.sritis,
+      subtema: row.subtema,
+      sourceName: row.source_name,
+      sourceUrl: row.source_url,
+      articleDate: row.article_date,
+      firstSeen: row.first_seen,
+      occurrences: (row.occurrences || []).map(function (o) {
+        return { date: o.date, source: o.source, url: o.url };
+      }).sort(function (a, b) { return (a.date || "").localeCompare(b.date || ""); })
+    };
+  }
+
+  function loadProblems() {
+    return sb.from("problems").select("*, occurrences(date, source, url)").then(function (res) {
+      if (res.error) throw res.error;
+      state.docs = (res.data || []).map(mapProblemRow).filter(function (d) { return d.title; });
+      renderAll();
+    }).catch(function (err) {
+      $("listHost").innerHTML = '<div class="empty">Nepavyko įkelti duomenų iš Supabase: ' + esc(err.message || String(err)) + '</div>';
+    });
+  }
+
+  function loadMeta() {
+    return sb.from("meta").select("*").eq("id", 1).single().then(function (res) {
+      if (res.error) throw res.error;
+      var m = res.data || {};
+      state.meta = {
+        lastRunDate: m.last_run_date, sourcesTotal: m.sources_total, sourcesChecked: m.sources_checked,
+        problemsFound: m.problems_found, scopeNote: m.scope_note, runType: m.run_type
+      };
       if (state.meta.lastRunDate) $("metaRunDate").textContent = fmtDate(state.meta.lastRunDate);
       if (state.meta.sourcesChecked != null) $("metaChecked").textContent = state.meta.sourcesChecked;
       if (state.meta.scopeNote) $("metaScope").textContent = state.meta.scopeNote;
-      renderAll();
-    }).catch(function (err) {
-      $("listHost").innerHTML = '<div class="empty">Nepavyko įkelti duomenų (data/problems.json): ' + esc(err.message) + '</div>';
-    });
+      renderTiles(state.docs, computeAggregates(state.docs));
+    }).catch(function () {});
+  }
+
+  function loadData() {
+    Promise.all([loadProblems(), loadMeta()]);
   }
   loadData();
 
-  // ---------------- sources panel (view + local edit + add) ----------------
+  // live updates: anyone's edit (agent's weekly run, or another viewer) refreshes this page automatically
+  sb.channel("public:problems-watch")
+    .on("postgres_changes", { event: "*", schema: "public", table: "problems" }, function () { loadProblems(); })
+    .on("postgres_changes", { event: "*", schema: "public", table: "occurrences" }, function () { loadProblems(); })
+    .on("postgres_changes", { event: "*", schema: "public", table: "meta" }, function () { loadMeta(); })
+    .subscribe();
 
-  var SRC_LS_KEY = "vk-mediju-stebesena.sources.v1";
+  // ---------------- sources panel (Supabase — live, PIN-gated writes) ----------------
 
-  function loadLocalSourceEdits() {
-    try { var raw = localStorage.getItem(SRC_LS_KEY); return raw ? JSON.parse(raw) : null; }
-    catch (e) { return null; }
+  function getRememberedPin() {
+    try { return localStorage.getItem(PIN_LS_KEY) || ""; } catch (e) { return ""; }
   }
-  function saveLocalSourceEdits(list) {
-    try { localStorage.setItem(SRC_LS_KEY, JSON.stringify(list)); } catch (e) {}
+  function rememberPin(pin, remember) {
+    try {
+      if (remember) localStorage.setItem(PIN_LS_KEY, pin);
+      else localStorage.removeItem(PIN_LS_KEY);
+    } catch (e) {}
   }
-  function sourceKey(s) { return s.url; }
+  function currentPin() {
+    var el = $("editPinInput");
+    return el ? el.value : getRememberedPin();
+  }
+  function friendlyRpcError(err) {
+    var msg = (err && err.message) || String(err);
+    if (msg.indexOf("neteisingas PIN") !== -1) return "Neteisingas PIN kodas.";
+    return msg;
+  }
 
   function loadSources() {
-    fetch("data/sources.json").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-      .then(function (baseList) {
-        state.sourcesBase = baseList;
-        var local = loadLocalSourceEdits();
-        state.sources = local || baseList.slice();
-        $("srcCountBtn").textContent = state.sources.length;
-        var cats = Array.from(new Set(baseList.map(function (s) { return s.kategorija; }).filter(Boolean)));
-        $("kategorijaList").innerHTML = cats.map(function (c) { return '<option value="' + esc(c) + '">'; }).join("");
-        renderSources();
-      })
-      .catch(function () {
-        $("sourcesListHost").innerHTML = '<div class="empty">Nepavyko įkelti data/sources.json.</div>';
-      });
+    return sb.from("sources").select("*").order("kategorija").then(function (res) {
+      if (res.error) throw res.error;
+      state.sources = res.data || [];
+      $("srcCountBtn").textContent = state.sources.length;
+      var cats = Array.from(new Set(state.sources.map(function (s) { return s.kategorija; }).filter(Boolean)));
+      $("kategorijaList").innerHTML = cats.map(function (c) { return '<option value="' + esc(c) + '">'; }).join("");
+      renderSources();
+    }).catch(function (err) {
+      $("sourcesListHost").innerHTML = '<div class="empty">Nepavyko įkelti šaltinių iš Supabase: ' + esc(err.message || String(err)) + '</div>';
+    });
   }
 
-  function persistSources() {
-    saveLocalSourceEdits(state.sources);
-    $("srcCountBtn").textContent = state.sources.length;
-  }
+  function sourceKey(s) { return s.id; }
 
   function renderSources() {
     var host = $("sourcesListHost");
@@ -971,16 +1025,28 @@
           '<span><span class="src-name">' + esc(s.pavadinimas) + '</span><span class="src-sritis">' + esc(s.sritis || "") + '</span></span>' +
           '<a class="src-url" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.url.replace(/^https?:\/\//, "")) + '</a>' +
           '<button type="button" class="src-remove" title="Pašalinti">✕</button>';
-        row.querySelector("input").addEventListener("change", function (e) {
-          s.monitored = e.target.checked;
-          row.classList.toggle("unmonitored", !s.monitored);
-          refreshCount();
-          persistSources();
+        var checkboxEl = row.querySelector("input");
+        checkboxEl.addEventListener("change", function (e) {
+          var next = e.target.checked;
+          var pin = currentPin();
+          sb.rpc("sources_set_monitored", { p_pin: pin, p_id: s.id, p_monitored: next }).then(function (res) {
+            if (res.error) throw res.error;
+            s.monitored = next;
+            row.classList.toggle("unmonitored", !s.monitored);
+            refreshCount();
+          }).catch(function (err) {
+            e.target.checked = !next; // revert
+            alert(friendlyRpcError(err));
+          });
         });
         row.querySelector(".src-remove").addEventListener("click", function () {
-          state.sources = state.sources.filter(function (x) { return sourceKey(x) !== sourceKey(s); });
-          persistSources();
-          renderSources();
+          if (!confirm('Pašalinti šaltinį „' + s.pavadinimas + '"?')) return;
+          var pin = currentPin();
+          sb.rpc("sources_delete", { p_pin: pin, p_id: s.id }).then(function (res) {
+            if (res.error) throw res.error;
+            state.sources = state.sources.filter(function (x) { return sourceKey(x) !== sourceKey(s); });
+            renderSources();
+          }).catch(function (err) { alert(friendlyRpcError(err)); });
         });
         det.appendChild(row);
       });
@@ -995,12 +1061,12 @@
     this.setAttribute("aria-expanded", String(willShow));
   });
   $("srcSearch").addEventListener("input", function () { if (state.sources) renderSources(); });
-  $("srcResetBtn").addEventListener("click", function () {
-    if (!confirm("Panaikinti visus šios naršyklės pakeitimus ir grįžti prie originalaus sąrašo?")) return;
-    try { localStorage.removeItem(SRC_LS_KEY); } catch (e) {}
-    state.sources = state.sourcesBase.slice();
-    renderSources();
-    $("srcCountBtn").textContent = state.sources.length;
+  $("editPinInput").value = getRememberedPin();
+  $("editPinRemember").addEventListener("change", function (e) {
+    rememberPin($("editPinInput").value, e.target.checked);
+  });
+  $("editPinInput").addEventListener("input", function () {
+    if ($("editPinRemember").checked) rememberPin(this.value, true);
   });
   $("srcDownloadBtn").addEventListener("click", function () {
     var blob = new Blob([JSON.stringify(state.sources, null, 2)], { type: "application/json" });
@@ -1014,18 +1080,31 @@
     e.preventDefault();
     var name = $("asName").value.trim(), url = $("asUrl").value.trim();
     if (!name || !url) return;
-    state.sources.push({
-      nr: String(state.sources.length + 1),
-      kategorija: $("asKategorija").value.trim() || "Rankiniu būdu pridėti",
-      pavadinimas: name,
-      sritis: $("asSritis").value.trim(),
-      url: url,
-      monitored: true
+    var pin = currentPin();
+    var submitBtn = e.target.querySelector("button[type=submit]");
+    submitBtn.disabled = true;
+    sb.rpc("sources_upsert", {
+      p_pin: pin, p_id: null,
+      p_kategorija: $("asKategorija").value.trim() || "Rankiniu būdu pridėti",
+      p_pavadinimas: name,
+      p_sritis: $("asSritis").value.trim(),
+      p_url: url,
+      p_monitored: true
+    }).then(function (res) {
+      submitBtn.disabled = false;
+      if (res.error) throw res.error;
+      e.target.reset();
+      loadSources();
+    }).catch(function (err) {
+      submitBtn.disabled = false;
+      alert(friendlyRpcError(err));
     });
-    persistSources();
-    renderSources();
-    e.target.reset();
   });
+
+  // realtime: refresh the sources list when anyone (this PIN or another) changes it
+  sb.channel("public:sources-watch")
+    .on("postgres_changes", { event: "*", schema: "public", table: "sources" }, function () { loadSources(); })
+    .subscribe();
 
   loadSources();
 

@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-  Konvertuoja data/problems.json (kanoninis duomenų šaltinis) į New-Xlsx.ps1
-  laukiamą formatą ir sugeneruoja galutinį .xlsx į ataskaitos/.
+  Skaito problemas + pasikartojimus tiesiai iš Supabase (viešas, tik-skaitymo
+  publishable raktas) ir sugeneruoja Excel ataskaitą į ataskaitos/.
 #>
 param(
-    [string]$ProblemsJson = "C:\Users\vmichalovska\Documents\VK_medijos_stebesena\data\problems.json",
     [string]$OutXlsx = ""  # jei tuščia, naudojama ataskaitos/VK_zin_apzvalga_<šiandienos data>.xlsx
 )
 
@@ -15,11 +14,17 @@ if (-not $OutXlsx) {
     $OutXlsx = Join-Path $root "ataskaitos\VK_zin_apzvalga_$today.xlsx"
 }
 
-$problems = Get-Content -Raw -Path $ProblemsJson -Encoding UTF8 | ConvertFrom-Json
+$env_ = & "$root\skriptai\Load-Env.ps1"
+$baseUrl = $env_["SUPABASE_URL"].TrimEnd("/")
+$pubKey = $env_["SUPABASE_PUBLISHABLE_KEY"]
+$headers = @{ "apikey" = $pubKey; "Authorization" = "Bearer $pubKey" }
+
+$problems = Invoke-RestMethod -Uri "$baseUrl/rest/v1/problems?select=*,occurrences(date,source,url)&order=sritis,article_date" -Headers $headers
+
 $rows = @()
 $i = 1
-foreach ($doc in ($problems | Sort-Object sritis, articleDate)) {
-    $occ = $doc.occurrences
+foreach ($doc in $problems) {
+    $occ = @($doc.occurrences | Sort-Object date)
     if ($occ.Count -gt 1) {
         $repeatsTxt = ($occ | ForEach-Object { "$($_.date) | $($_.source) | $($_.url)" }) -join "  ;  "
     } else {
@@ -29,15 +34,15 @@ foreach ($doc in ($problems | Sort-Object sritis, articleDate)) {
         nr          = $i
         title       = $doc.title
         desc        = $doc.description
-        sourceName  = $doc.sourceName
-        url         = $doc.sourceUrl
-        url_text    = $doc.sourceName + " straipsnis"
-        date        = $doc.articleDate
+        sourceName  = $doc.source_name
+        url         = $doc.source_url
+        url_text    = $doc.source_name + " straipsnis"
+        date        = $doc.article_date
         sritis      = $doc.sritis
         subtema     = $doc.subtema
         repeats     = $repeatsTxt
-        repeatCount = $occ.Count
-        firstSeen   = $doc.firstSeen
+        repeatCount = [Math]::Max($occ.Count, 1)
+        firstSeen   = $doc.first_seen
     }
     $i++
 }

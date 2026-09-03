@@ -1,3 +1,9 @@
 skriptai/db_export*/
 *.tmp
 ~$*
+
+# Slapti raktai — NIEKADA neįkelti į GitHub
+.env
+.env.*
+!.env.example
+skriptai/*_LOCAL_ONLY.sql
